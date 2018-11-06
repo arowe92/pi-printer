@@ -1,0 +1,21 @@
+<h2> Todo </h2>
+<ul>
+{{#todo_items}}
+<li>
+    <span>{{content}}</span>
+    <span id='due-date'>{{due_date}}</span>
+</li>
+{{/todo_items}}
+</ul>
+
+<h2>Calendar</h2>
+<ul>
+{{#cal_items}}
+<li>
+    <span>{{content}}</span>
+    {{^all_day}}
+        <span id='due-date'>{{due_date}}</span>
+    {{/all_day}}
+</li>
+{{/cal_items}}
+</ul>

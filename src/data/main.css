@@ -1,0 +1,67 @@
+body {
+    width: 360px;
+    font-family: "Proxima Nova Alt", sans-serif;
+    text-align: center;
+    padding: 0px 10px 0;
+    padding-bottom: 30px;
+    background: white;
+    color: #444;
+    margin: 0;
+
+    font-weight: 500;
+}
+
+h1, h2, h3 {
+  font-size: 30px;
+  line-height: 1.0em;
+  padding: 10px 0;
+  text-align: left;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 23px;
+}
+
+#day {
+    display: block;
+    font-size: 90%;
+    font-weight: 500;
+}
+
+#date {
+}
+
+
+ul {
+    text-align: left;
+}
+
+li {
+    width: 100%;
+    list-style:circle;
+    font-size: 15pt;
+}
+
+#due-date {
+    float: right;
+    font-weight: 300;
+    text-align: right;
+
+}
+
+#weather {
+padding: 10px 0px;
+text-align: left;
+font-size: 1.4em;
+
+}
+
+#status {
+    /* font-family: "Proxima Nova Alt"; */
+    font-weight: bold;
+    font-size: 1.2em;
+}
