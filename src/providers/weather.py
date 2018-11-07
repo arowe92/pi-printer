@@ -6,15 +6,13 @@ from . util import Provider
 class WeatherProvider(Provider):
 
     template_raw = '''
-        {{#weather}}
-            <div id='weather'>
-                <span id='status'>
-                    {{text}},
-                </span>
-                <span id='temp'>{{low}}°↓ {{high}}↑°</span>
-                <!-- <i class='wi wi-day-{{status}}'></i> -->
-            </div>
-        {{/weather}}
+        <div id='weather'>
+            <span id='status'>
+                {{text}},
+            </span>
+            <span id='temp'>{{low}}°↓ {{high}}↑°</span>
+            <!-- <i class='wi wi-day-{{status}}'></i> -->
+        </div>
     '''
 
     def get_data(self) -> dict:
