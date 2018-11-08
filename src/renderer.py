@@ -4,7 +4,6 @@ from subprocess import Popen
 
 import pystache
 
-
 def get_js(html, output_file):
     return f'''
         var page = require('webpage').create();

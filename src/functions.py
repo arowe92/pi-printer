@@ -1,17 +1,14 @@
-from . providers import PROVIDERS
+from . providers import get_content
 from . renderer import html_to_image
 from . import printer
 
 
-def print_todo(providers=None):
-    if providers is None:
-        providers = PROVIDERS
-
+def print_todo():
     print('generating html')
-    html = ''
-    for p in PROVIDERS:
-        html += p().render()
+    html = get_content()
 
+    print('Rendering')
     html_to_image(html, 'output.jpg')
+
     print('printing...')
     printer.image('output.jpg')

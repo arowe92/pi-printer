@@ -15,6 +15,7 @@ setup(
         'todo_printer': [
             'data/*.css',
             'data/templates/*.html',
+            'data/svg/*.svg',
         ]
     },
     include_package_data=True,
