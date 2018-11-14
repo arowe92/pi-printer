@@ -18,7 +18,7 @@ class TodoProvider(Provider):
         cal_items = []
         todo_items = []
 
-        now = pytz.UTC.localize(datetime.now())
+        now = datetime.now().astimezone(tz=None)
 
         # Iterate through all items
         for item in self.api.items.all():
@@ -28,7 +28,6 @@ class TodoProvider(Provider):
             # let inbox entries continue through
             if project == 'Inbox' and due_date is None:
                 due_date = datetime.now()
-                due_date = pytz.UTC.localize(due_date)
 
             # We only want ones with due dates
             if due_date is None or item.data['date_completed'] is not None:
@@ -38,19 +37,23 @@ class TodoProvider(Provider):
             if type(due_date) is str:
                 due_date = datetime.strptime(due_date, '%a %d %b %Y %H:%M:%S %z')
 
+            due_date = due_date.astimezone(tz=None)
             item.data['date_obj'] = due_date
 
-            if now.date() + timedelta(days=3) <= due_date.date():
+            if now.date() + timedelta(days=5) <= due_date.date():
                 continue
 
             # Get Those labels
             # add to calendar if necessary
-            labels = map(
+            labels = list(map(
                 lambda l: self.api.labels.get(l)['label']['name'],
                 item.data['labels']
-            )
+            ))
             # Get Calendar items that are TODAY
-            if 'GCal' in labels and now.date() == due_date.date():
+            if 'GCal' in labels:
+                if now.date() != due_date.date():
+                    continue
+
                 # Add to list
                 cal_items += [item.data]
 
@@ -70,8 +73,15 @@ class TodoProvider(Provider):
                 project = ''
 
             # Add properties
+            if due_date.date() < now.date():
+                string = 'overdue'
+            elif due_date.date() == now.date():
+                string = ''
+            else:
+                string = due_date.strftime('%a')
+
+            item.data['due_date'] = string
             item.data['project_name'] = project
-            item.data['due_date'] = due_date.strftime('%a')
             todo_items += [item.data]
 
         todo_items.sort(key=lambda x: x['date_obj'])
@@ -79,5 +89,6 @@ class TodoProvider(Provider):
 
         return {
             'cal_items': cal_items,
+            'cal_items_length': len(cal_items),
             'todo_items': todo_items,
         }

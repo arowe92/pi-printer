@@ -26,3 +26,12 @@ class Provider:
             raise Exception("No template found!")
 
         return pystache.render(content, data)
+
+    @staticmethod
+    def render_all(providers):
+        html = ''
+
+        for p in providers:
+            html += p.render()
+
+        return html
