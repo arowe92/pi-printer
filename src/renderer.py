@@ -65,7 +65,7 @@ template = """
 
 def html_to_image(html: str, output_file='output.png'):
     # Inject HTML into template
-    with open(Path(__file__).parent / 'data' / 'styles/main.css', 'r') as f:
+    with open(Path(__file__).parent / 'data' / 'styles' / 'receipt.css', 'r') as f:
         html = pystache.render(template, {
             'css': f.read(),
             'body': html

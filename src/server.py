@@ -83,6 +83,8 @@ def run_send_message(*args, **kargs):
         'error': error,
         'name': name,
         'body': body,
+    }, {
+        'title': 'Send a Message'
     })
 
 
