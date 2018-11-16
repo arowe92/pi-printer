@@ -5,6 +5,14 @@ class Provider:
 
     template = None
     template_raw = None
+    css = ''
+
+    base_template = '''
+    <section class='provider' id='{{id}}'>
+        {{{content}}}
+        <style>{{{css}}}</style>
+    </section>
+    '''
 
     @staticmethod
     def get_template(template):
@@ -12,8 +20,11 @@ class Provider:
         with open(path.absolute(), 'r') as f:
             return f.read()
 
-    def get_data() -> dict:
-        return {}
+    def get_data(self) -> dict:
+        if hasattr(self, 'data'):
+            return self.data
+        else:
+            return {}
 
     def render(self) -> str:
         data = self.get_data()
@@ -25,7 +36,15 @@ class Provider:
         else:
             raise Exception("No template found!")
 
-        return pystache.render(content, data)
+        # Render content
+        html = pystache.render(content, data)
+
+        # insert into baseline template
+        return pystache.render(self.base_template, {
+            'id': self.__class__.__name__.lower().replace('provider', ''),
+            'content': html,
+            'css': self.css,
+        })
 
     @staticmethod
     def render_all(providers):

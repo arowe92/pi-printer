@@ -1,0 +1,36 @@
+{{#success}}
+<section id='message-box'>
+    <h1 class='p-big text-huge bg-gray-light'>Success, Thanks!</h1>
+</section>
+{{/success}}
+{{^success}}
+<section id='message-box'>
+    <div id='load' class="loadingBar" style='visibility:hidden'></div>
+    <form id='message-form' action='/send_message' method='post'>
+        <p class='text-big'>Send a message to Alex's printer!</p>
+        <label class="label" for="name">Name</label>
+        <div class="input input-fullWidth">
+            <input name='name' id="name" placeholder="Name" type="text" value='{{name}}'>
+        </div>
+        <label class="label" for="message">Message</label>
+        <div class="textarea">
+          <textarea name='body' id="message">{{body}}</textarea>
+        </div>
+        <p class='text-small text-gray'>Markdown supported</p>
+        <p class="text-error text-small">
+            {{error}}
+        </p>
+        <button id='form-submit' class="button button--primary">Submit</button>
+    </form>
+</section>
+
+<script type="text/javascript">
+var form = document.getElementById("message-form");
+var button= document.getElementById("form-submit");
+
+button.addEventListener("click", function () {
+    form.submit()
+    document.getElementById('load').style.visibility = 'visible';
+});
+</script>
+{{/success}}

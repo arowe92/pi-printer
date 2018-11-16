@@ -1,2 +1,6 @@
 output.html
 output.jpg
+*.egg-info
+build
+dist
+__pycache__
