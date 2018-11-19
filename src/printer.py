@@ -22,7 +22,7 @@ def module_method(fn):
 
 class Printer():
 
-    def __init__(self, code=(0x0416, 0x5011)):
+    def __init__(self, code=(0x0416, 0x5011, 0x81, 0x03)):
         self.code = code
         try:
             self.usb = Usb(*self.code)

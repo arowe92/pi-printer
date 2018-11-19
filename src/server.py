@@ -61,6 +61,7 @@ def run_print(*args, **kargs):
     return 'success'
 
 
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/send_message", methods=['GET', 'POST'])
 def run_send_message(*args, **kargs):
     name = request.form.get('name') or ''
@@ -73,9 +74,16 @@ def run_send_message(*args, **kargs):
             error = 'Both fields must be entered!'
         else:
             try:
-                printer.providers(MessageProvider(name, body))
+                provider = MessageProvider(name, body)
+
+                with open(pathlib.Path.home() / 'messages.html', 'a') as f:
+                    f.write(provider.render())
+
+                printer.providers(provider)
+
                 success = True
-            except:
+            except Exception as e:
+                print(e)
                 error = 'Sorry, an error Occurred!'
 
     return render_template('message.html', {

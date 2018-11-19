@@ -6,18 +6,18 @@ from markdown import markdown
 class MessageProvider(Provider):
 
     css = '''
-        #message h2, #message h3{
-            margin-top: 0px;
-            margin-bottom: 0px;
+        #message h2#from {
+            float: clear;
+            margin-top: 30px;
+            margin-bottom: 10px;
         }
-        #message p {
+        #message #body {
             text-align: left;
-            font-size: 120%;
+            font-size: 130%;
+            padding-bottom: 20px;
+            border-bottom: 1px solid black;
         }
-        #message #from {
-            font-weight: 300;
-        }
-        #mssage #title {
+        #message #title {
             float: left;
         }
         #message #date {
@@ -25,7 +25,7 @@ class MessageProvider(Provider):
         }
         #message header {
             font-weight: 700;
-            font-size: 125%;
+            font-size: 120%;
             margin: 0px;
             padding: 0px;
             padding-top: 10px;
@@ -36,18 +36,18 @@ class MessageProvider(Provider):
         <header>
             <span id='title'>
                 Message Received
-            <span>
+            </span>
             <span id='date'>
                 {{date}}
             </span>
         </header>
-        <h2>
-            <span id='from'>From:</span>
-            <label>{{name}}<label>
+        <h2 id='from'>
+            <span>From:</span>
+            <label>{{name}}</label>
         </h2>
-        <p>
+        <div id='body'>
             {{{body}}}
-        </p>
+        </div>
     '''
 
     def __init__(self, name, body):

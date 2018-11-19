@@ -1,4 +1,4 @@
-rsync -avz ./ pi@192.168.0.30:/home/pi/escpos2
+rsync -avz ./ pi@192.168.0.30:/home/pi/escpos
 
-ssh rpi 'cd escpos2 && pip install . --upgrade'
+ssh rpi 'cd escpos && pip install . '
 ssh rpi 'sudo systemctl restart todo'

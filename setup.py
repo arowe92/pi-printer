@@ -23,7 +23,7 @@ class PostBuildCommand(build_py):
 
 setup(
     name='todo_printer',  # Required
-    version='1.0.0',  # Required
+    version='1.1.0',  # Required
     packages=[
         'todo_printer',
         'todo_printer.providers',
@@ -34,7 +34,8 @@ setup(
     },
     package_data={
         'todo_printer': [
-            'data/*.css',
+            'data/scripts/*.js',
+            'data/styles/*.css',
             'data/templates/*.html',
             'data/svg/*.svg',
         ]
