@@ -2,6 +2,9 @@ from flask import Flask, request, Response
 from datetime import datetime
 import pystache
 import pathlib
+from logging import getLogger
+
+log = getLogger()
 
 from . providers import get_providers, MessageProvider
 from . import printer
@@ -83,7 +86,7 @@ def run_send_message(*args, **kargs):
 
                 success = True
             except Exception as e:
-                print(e)
+                log.error(e)
                 error = 'Sorry, an error Occurred!'
 
     return render_template('message.html', {
